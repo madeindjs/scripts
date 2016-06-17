@@ -7,9 +7,17 @@ import time
 
 
 if __name__ == '__main__': 
-	print('********************************')
-	print('create a new template of project')
-	print('********************************')
+
+
+	terminal_width = 80
+
+	def print_line():
+		print('_'*terminal_width)
+
+
+
+
+	print_title('create a new template of project')
 
 
 	# project_dir = os.getcwd() + '/' + project_name
@@ -20,12 +28,12 @@ if __name__ == '__main__':
 
 	n_boucle = 0
 	for type_projet in type_projets:
-		print( '    '+str(n_boucle) +'  #  '+ type_projet )
+		print( "\t{} # {}".format(n_boucle, type_projet))
 		n_boucle += 1
 
 	input_int =  int(input("which type? "))
 
-	os.chdir('C:/Users/rousseaua/! Projets/'+type_projets[input_int])
+	os.chdir('C:/Users/rousseaua/! Projets/{}'.format(type_projets[input_int]))
 
 	if input_int == 0:
 		dirs = os.listdir('.')
@@ -54,11 +62,10 @@ if __name__ == '__main__':
 		print('project name already exist')
 		pass
 	else:
-		os.mkdir (project_dir)
-		os.mkdir (project_dir + '/plan DWG')
-		os.mkdir (project_dir + '/plan PDF')
-		os.mkdir (project_dir + '/devis')   
-		os.mkdir (project_dir + '/bilan & sélection')
+		# build all folders
+		for folder_to_build in ['', 'plan DWG', '/plan PDF', '/devis', '/bilan & sélection' ]:
+			os.mkdir ('{}/{}'.format(project_dir, folder_to_build))
+
 		src = ressour_dir+"/Calculs/Bilan et DANFOSS 2014.xlsx"
 		dest = project_dir + '/bilan & sélection/--'+project_name+'- Bilan et DANFOSS.xlsx'
 		shutil.copy( src , dest )   
