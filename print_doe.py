@@ -69,6 +69,7 @@ def main():
 	parser.add_argument("-d", "--directory",type=str, help="print a given directory")
 	parser.add_argument("-l", "--level", 		type=int, help="get deepth level in the given directory")
 	parser.add_argument("-n", "--number", 	type=int, help="Number of copy to print")
+	parser.add_argument("-a", "--doe", 	type=str, help="Print a complete DOE")
 	args = parser.parse_args()
 
 
@@ -83,9 +84,12 @@ def main():
 
 	copy = args.number if args.number else 1
 
-	for _ in range(copy):
+	for i in range(copy):
 
-		if args.directory:# print the given directory
+		if args.doe:
+			print_dir(args.doe, 10)
+
+		elif args.directory:# print the given directory
 				print_dir(args.directory, args.level)
 
 		elif args.file:# print the given file
@@ -94,6 +98,14 @@ def main():
 		else:# print a test file
 			url = "C:/Users/rousseaua/Desktop/DOE Metro Clermont/DESP/BOUTEILLES/Plan_2312066_230715.pdf"
 			print_file(url)
+
+		# display a message for copies
+		n_copy = i+1
+		rest_copy = copy - n_copy
+		if rest_copy:
+			print("End of copy n°%s (rest *%s)" % (n_copy,rest_copy ))
+			os.system("pause")
+
 
 
 
