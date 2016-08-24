@@ -21,17 +21,16 @@ blacklist_files = []
 
 
 
-def print_file(filepath, copy=1):
+def print_file(filepath):
 	"""print a file on the default printer"""
 	filename, extension = os.path.splitext(filepath)
 	filename = os.path.basename(filename)
 	if extension in extensions_allowed and not filename in blacklist_files:
 		try:
-			for _ in range(copy):
-				win32api.ShellExecute ( 0, "print", filepath,
-					# If this is None, the default printer will  be used anyway.
-					'/d:"%s"' % win32print.GetDefaultPrinter (),
-					".", 0 )
+			win32api.ShellExecute ( 0, "print", filepath,
+				# If this is None, the default printer will  be used anyway.
+				'/d:"%s"' % win32print.GetDefaultPrinter (),
+				".", 0 )
 			print("[*] request to print %s" % filepath)
 		except :
 			print("[ ] failed to print %s (maybe a wrong url?)" % filepath)
@@ -41,7 +40,7 @@ def print_file(filepath, copy=1):
 
 
 
-def print_dir(directory, copy=1, level=1):
+def print_dir(directory, level=1):
 	"""print all files on the default printer"""
 
 	try:
@@ -51,7 +50,7 @@ def print_dir(directory, copy=1, level=1):
 				for file in files:
 					filepath = os.path.join(root, file )
 
-					print_file(filepath, copy)
+					print_file(filepath)
 			else:
 				break
 
@@ -72,7 +71,6 @@ def main():
 	parser.add_argument("-n", "--number", 	type=int, help="Number of copy to print")
 	args = parser.parse_args()
 
-	copy = args.number if args.number else 1
 
 	# load settings
 	with open('settings.json') as data_file:    
@@ -82,15 +80,20 @@ def main():
 		extensions_allowed = data['print_doe']['extensions_allowed']
 		blacklist_files = data['print_doe']['blacklist_files']
 
-	if args.directory:# print the given directory
-		print_dir(args.directory, copy, args.level)
 
-	elif args.file:# print the given file
-		print_file(args.file, copy)
+	copy = args.number if args.number else 1
 
-	else:# print a test file
-		url = "C:/Users/rousseaua/Desktop/DOE Metro Clermont/DESP/BOUTEILLES/Plan_2312066_230715.pdf"
-		print_file(url, copy)
+	for _ in range(copy):
+
+		if args.directory:# print the given directory
+				print_dir(args.directory, args.level)
+
+		elif args.file:# print the given file
+				print_file(args.file)
+
+		else:# print a test file
+			url = "C:/Users/rousseaua/Desktop/DOE Metro Clermont/DESP/BOUTEILLES/Plan_2312066_230715.pdf"
+			print_file(url)
 
 
 
