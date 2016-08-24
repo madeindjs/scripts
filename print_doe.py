@@ -20,22 +20,30 @@ import win32api, win32print
 
 def print_file(filename):
 	"""print a file on the default printer"""
-	print("[*] request to print %s" % filename)
-	win32api.ShellExecute ( 0, "print", filename,
-		# If this is None, the default printer will  be used anyway.
-		'/d:"%s"' % win32print.GetDefaultPrinter (),
-		".", 0 )
+	try:
+		win32api.ShellExecute ( 0, "print", filename,
+			# If this is None, the default printer will  be used anyway.
+			'/d:"%s"' % win32print.GetDefaultPrinter (),
+			".", 0 )
+		print("[*] request to print %s" % filename)
+	except pywintypes.error:
+		print("[ ] failed to print %s (maybe a wrong url?)" % filename)
+
 
 
 
 def print_dir(directory):
 	"""print all files on the default printer"""
 	directory = directory.replace('\\', '/')
-	print("[*] search file into %s" % directory)
 	# get all files in the folder
-	files=[directory+"/"+file for file in os.listdir(directory) if not os.path.isdir(file)]
-	for file in files:
-		print_file(file)
+	try:
+		files=[directory+"/"+file for file in os.listdir(directory) if not os.path.isdir(file)]
+		print("[*] search file into %s" % directory)
+		for file in files:
+			print_file(file)
+	except FileNotFoundError:
+		print("[ ] failed to find files into %s (maybe a wrong url?)" % directory)
+	
 
 
 
