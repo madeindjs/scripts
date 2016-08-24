@@ -1,0 +1,19 @@
+{
+	"print_doe" : {
+		"extensions_allowed" : [
+			".pdf",
+			".json",
+			".txt"
+		],
+		"blacklist_files" : [
+			"UA300 V2.52 (Notice d instruction)",
+			"UA300D V2.01 (Notice d instruction)",
+			"UA300E V2.02 (Notice d instruction)",
+			"UA300L V2.01 (Notice d instruction)",
+			"UA300V V1.1 (Notice d instruction)",
+			"UA400E V1.57 (Notice d instruction)",
+			"VS3010 V4.16 (Notice d instruction)",
+			"VS3010C V4.16 (Notice d instruction)"
+		]
+	}
+}

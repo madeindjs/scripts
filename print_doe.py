@@ -12,12 +12,12 @@
 	updated: 2016/08/24
 
 """
-import os, argparse
+import os, argparse, json
 # require pywin32 (download at https://sourceforge.net/projects/pywin32/ )
 import win32api, win32print
 
-EXTENSIONS_ALLOWED = ['.pdf']
-BLACKLIST_FILES = [ 'Plan_2312066_230715']
+extensions_allowed = []
+blacklist_files = []
 
 
 
@@ -25,7 +25,7 @@ def print_file(filepath, copy=1):
 	"""print a file on the default printer"""
 	filename, extension = os.path.splitext(filepath)
 	filename = os.path.basename(filename)
-	if extension in EXTENSIONS_ALLOWED and not filename in BLACKLIST_FILES:
+	if extension in extensions_allowed and not filename in blacklist_files:
 		try:
 			for _ in range(copy):
 				win32api.ShellExecute ( 0, "print", filepath,
@@ -33,8 +33,10 @@ def print_file(filepath, copy=1):
 					'/d:"%s"' % win32print.GetDefaultPrinter (),
 					".", 0 )
 			print("[*] request to print %s" % filepath)
-		except pywintypes.error:
+		except :
 			print("[ ] failed to print %s (maybe a wrong url?)" % filepath)
+	else:
+		print("[ ] not allowed to print %s (blacklisted)" % filepath)
 
 
 
@@ -71,6 +73,14 @@ def main():
 	args = parser.parse_args()
 
 	copy = args.number if args.number else 1
+
+	# load settings
+	with open('settings.json') as data_file:    
+		data = json.load(data_file)
+		global extensions_allowed
+		global blacklist_files
+		extensions_allowed = data['print_doe']['extensions_allowed']
+		blacklist_files = data['print_doe']['blacklist_files']
 
 	if args.directory:# print the given directory
 		print_dir(args.directory, copy, args.level)
