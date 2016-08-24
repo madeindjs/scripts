@@ -12,14 +12,12 @@
 	updated: 2016/08/24
 
 """
-
-import tempfile
 # require pywin32 (download at https://sourceforge.net/projects/pywin32/ )
 import win32api 
 import win32print
 
-filename = tempfile.mktemp (".txt")
-open (filename, "w").write ("This is a test")
+filename = "C:/Users/rousseaua/Desktop/DOE Metro Clermont/DESP/BOUTEILLES/Plan_2312066_230715.pdf"
+
 win32api.ShellExecute (
   0,
   "print",
