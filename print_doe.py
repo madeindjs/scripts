@@ -16,19 +16,25 @@ import os, argparse
 # require pywin32 (download at https://sourceforge.net/projects/pywin32/ )
 import win32api, win32print
 
+EXTENSIONS_ALLOWED = ['.pdf']
+BLACKLIST_FILES = [ 'Plan_2312066_230715']
 
 
-def print_file(filename, copy=1):
+
+def print_file(filepath, copy=1):
 	"""print a file on the default printer"""
-	try:
-		for _ in range(copy):
-			win32api.ShellExecute ( 0, "print", filename,
-				# If this is None, the default printer will  be used anyway.
-				'/d:"%s"' % win32print.GetDefaultPrinter (),
-				".", 0 )
-		print("[*] request to print %s" % filename)
-	except pywintypes.error:
-		print("[ ] failed to print %s (maybe a wrong url?)" % filename)
+	filename, extension = os.path.splitext(filepath)
+	filename = os.path.basename(filename)
+	if extension in EXTENSIONS_ALLOWED and not filename in BLACKLIST_FILES:
+		try:
+			for _ in range(copy):
+				win32api.ShellExecute ( 0, "print", filepath,
+					# If this is None, the default printer will  be used anyway.
+					'/d:"%s"' % win32print.GetDefaultPrinter (),
+					".", 0 )
+			print("[*] request to print %s" % filepath)
+		except pywintypes.error:
+			print("[ ] failed to print %s (maybe a wrong url?)" % filepath)
 
 
 
