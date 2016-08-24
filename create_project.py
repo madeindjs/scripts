@@ -34,7 +34,7 @@ if __name__ == '__main__':
 	print( Writter.subtitle('Chose a type of project') )
 	print( Writter.sorted_list( *type_projets ) )
 	input_int = Writter.ask_int( 'Which type' )
-	os.chdir('C:/Users/rousseaua/! Projets/{}'.format(type_projets[input_int]))
+	os.chdir('C:/Users/rousseaua/! Projets/TEC/{}'.format(type_projets[input_int]))
 
 	# if it's a Marocco project, I ask wich brand it is
 	if input_int == 0: 
