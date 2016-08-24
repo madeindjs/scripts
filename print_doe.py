@@ -33,15 +33,22 @@ def print_file(filename, copy=1):
 
 
 
-def print_dir(directory, copy=1):
+def print_dir(directory, copy=1, level=1):
 	"""print all files on the default printer"""
-	directory = directory.replace('\\', '/')
-	# get all files in the folder
+
 	try:
-		files=[directory+"/"+file for file in os.listdir(directory) if not os.path.isdir(file)]
-		print("[*] search file into %s" % directory)
-		for file in files:
-			print_file(file, copy)
+		# get all directories to scan
+		for root, dirs, files in os.walk(directory):
+			if level > 0:
+				for file in files:
+					filepath = os.path.join(root, file )
+
+					print_file(filepath, copy)
+			else:
+				break
+
+			level-=1
+
 	except FileNotFoundError:
 		print("[ ] failed to find files into %s (maybe a wrong url?)" % directory)
 	
@@ -51,15 +58,16 @@ def print_dir(directory, copy=1):
 def main():
 	# parse arg to find file(s)
 	parser = argparse.ArgumentParser()
-	parser.add_argument("-f", "--file", type=str, help="print a given file")
+	parser.add_argument("-f", "--file", 		type=str, help="print a given file")
 	parser.add_argument("-d", "--directory",type=str, help="print a given directory")
-	parser.add_argument("-n", "--number",type=int, help="Number of copy to print")
+	parser.add_argument("-l", "--level", 		type=int, help="get deepth level in the given directory")
+	parser.add_argument("-n", "--number", 	type=int, help="Number of copy to print")
 	args = parser.parse_args()
 
 	copy = args.number if args.number else 1
 
 	if args.directory:# print the given directory
-		print_dir(args.directory, copy)
+		print_dir(args.directory, copy, args.level)
 
 	elif args.file:# print the given file
 		print_file(args.file, copy)
