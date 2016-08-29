@@ -83,6 +83,7 @@ def main():
 
 
 	copy = args.number if args.number else 1
+	level = args.level if args.level else 100
 
 	for i in range(copy):
 
@@ -90,7 +91,7 @@ def main():
 			print_dir(args.doe, 10)
 
 		elif args.directory:# print the given directory
-				print_dir(args.directory, args.level)
+				print_dir(args.directory, level)
 
 		elif args.file:# print the given file
 				print_file(args.file)
