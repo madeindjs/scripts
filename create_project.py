@@ -19,7 +19,7 @@ import os
 import shutil
 import time
 
-from writer.writer import Writer
+from writer import Writer
 
 
 if __name__ == '__main__': 
