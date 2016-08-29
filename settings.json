@@ -1,4 +1,11 @@
 {
+
+	"create_project" : {
+		"types_projets" 	: [ "Maroc" , "Metro" , "Stations" ,"Autres projets"],
+		"ressour_dir" 		: "C:/Users/rousseaua/! Ressources" ,
+		"folders_to_build" 	: ["", "plan DWG", "plan PDF", "devis", "bilan & sélection", "LDS" ]
+	},
+
 	"print_doe" : {
 		"extensions_allowed" : [
 			".pdf",

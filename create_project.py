@@ -24,17 +24,28 @@ from writter.writter import Writter
 
 if __name__ == '__main__': 
 
-	ressour_dir = 'C:/Users/rousseaua/! Ressources'
-	type_projets = [ 'Maroc' , 'Metro' , 'Stations' ,'Autres projets']
+	types_projets = []
+	folder_to_build = []
+	ressour_dir = str()
 
 
 	print( Writter.title('create a new template of project') )
 
+	# load settings
+	with open('settings.json') as data_file:    
+		data = json.load(data_file)
+		global types_projets
+		global ressour_dir
+		global folder_to_build
+		types_projets 	= data['create_project']['types_projets']
+		folder_to_build = data['create_project']['folder_to_build']
+		ressour_dir 	= data['create_project']['ressour_dir'][0]
+
 	# ask a type of project and move into this folder
 	print( Writter.subtitle('Chose a type of project') )
-	print( Writter.sorted_list( *type_projets ) )
+	print( Writter.sorted_list( *types_projets ) )
 	input_int = Writter.ask_int( 'Which type' )
-	os.chdir('C:/Users/rousseaua/! Projets/TEC/{}'.format(type_projets[input_int]))
+	os.chdir('C:/Users/rousseaua/! Projets/TEC/{}'.format(types_projets[input_int]))
 
 	# if it's a Marocco project, I ask wich brand it is
 	if input_int == 0: 
