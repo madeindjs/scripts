@@ -16,10 +16,19 @@ A simply script to build a skeleton of a technical project (i'm a design office 
 
     python create_project.py
 
+### requirements
+
+* [Writer](https://pypi.python.org/pypi/writer) `pip install writer`
+
+or you can do `pip install -r requirements.txt` to install all requiremnts in once time.
+
 
 ### To Do
 
 * [ ]: edit Excel file with [openpyxl](http://pypi.python.org/pypi/openpyxl) librairy
+
+
+-------------------------------------------------------------------------------
 
 print_doe.py
 ------------
@@ -35,4 +44,6 @@ It can be parameter to
 
     python print_doe.py -d "c:\Users\rousseaua\folder"
 
-> Need to install [pywin32](https://sourceforge.net/projects/pywin32/)
+### requirements
+
+Need to install [pywin32](https://sourceforge.net/projects/pywin32/)
