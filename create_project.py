@@ -29,7 +29,7 @@ if __name__ == '__main__':
 	ressour_dir = str()
 
 
-	print( Writter.title('create a new template of project') )
+	Writter.title('create a new template of project')
 
 	# load settings
 	with open('settings.json') as data_file:    
@@ -42,15 +42,15 @@ if __name__ == '__main__':
 		ressour_dir 	= data['create_project']['ressour_dir'][0]
 
 	# ask a type of project and move into this folder
-	print( Writter.subtitle('Chose a type of project') )
-	print( Writter.sorted_list( *types_projets ) )
+	Writter.subtitle('Chose a type of project')
+	Writter.sorted_list( *types_projets )
 	input_int = Writter.ask_int( 'Which type' )
 	os.chdir('C:/Users/rousseaua/! Projets/TEC/{}'.format(types_projets[input_int]))
 
 	# if it's a Marocco project, I ask wich brand it is
 	if input_int == 0: 
 		dirs = os.listdir('.')
-		print( Writter.sorted_list( *dirs ) )
+		Writter.sorted_list( *dirs )
 		input_int =  Writter.ask_int( 'Which brand' )
 		os.chdir('./'+dirs[input_int])
 		
