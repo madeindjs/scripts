@@ -9,7 +9,7 @@
 	author: Rousseau Alexandre
 
 	created: 2016/02/23
-	updated: 2016/06/20
+	updated: 2016/08/29
 
 """
 
@@ -19,7 +19,7 @@ import os
 import shutil
 import time
 
-from writter.writter import Writter
+from writer.writer import Writer
 
 
 if __name__ == '__main__': 
@@ -29,7 +29,7 @@ if __name__ == '__main__':
 	ressour_dir = str()
 
 
-	Writter.title('create a new template of project')
+	Writer.title('create a new template of project')
 
 	# load settings
 	with open('settings.json') as data_file:    
@@ -42,16 +42,16 @@ if __name__ == '__main__':
 		ressour_dir 	= data['create_project']['ressour_dir'][0]
 
 	# ask a type of project and move into this folder
-	Writter.subtitle('Chose a type of project')
-	Writter.sorted_list( *types_projets )
-	input_int = Writter.ask_int( 'Which type' )
+	Writer.subtitle('Chose a type of project')
+	Writer.sorted_list( *types_projets )
+	input_int = Writer.ask_int( 'Which type' )
 	os.chdir('C:/Users/rousseaua/! Projets/TEC/{}'.format(types_projets[input_int]))
 
 	# if it's a Marocco project, I ask wich brand it is
 	if input_int == 0: 
 		dirs = os.listdir('.')
-		Writter.sorted_list( *dirs )
-		input_int =  Writter.ask_int( 'Which brand' )
+		Writer.sorted_list( *dirs )
+		input_int =  Writer.ask_int( 'Which brand' )
 		os.chdir('./'+dirs[input_int])
 		
 	# move into ./2016 folder or create it 
@@ -62,7 +62,7 @@ if __name__ == '__main__':
 	os.chdir( path_year )
 
 	# ask a name for this project & create a new folder
-	project_name = Writter.input('Project name')
+	project_name = Writer.input('Project name')
 	project_dir = './{}'.format( project_name )
 
 
