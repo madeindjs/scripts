@@ -3,47 +3,25 @@ Scripts
 
 My personnally scripts to automate boring stuffs
 
-create_project.py
------------------
+## Install
 
-A simply script to build a skeleton of a technical project (i'm a design office assistant).
+    $ cd ~/usr/bin
+    $ git clone https://github.com/madeindjs/scripts.git
+    $ chmod u+x scripts/*
+    $ mv scripts/* .
+    $ rm -r scripts
 
-* ask the name of the new project
-* build some folders
-* move files into theses folder
+## Scripts
 
-### Use
+### check_staged_php_files.sh
 
-    python create_project.py
-
-### requirements
-
-* [Writer](https://pypi.python.org/pypi/writer) `pip install writer`
-
-or you can do `pip install -r requirements.txt` to install all requiremnts in once time.
+Check syntax for all PHP files staged by git
 
 
-### To Do
+### check_staged_php_files.sh
 
-* [ ]: edit Excel file with [openpyxl](http://pypi.python.org/pypi/openpyxl) librairy
+Check syntax for all PHP files staged by git
 
+### gac_search_lang.sh
 
--------------------------------------------------------------------------------
-
-print_doe.py
-------------
-
-A script to print each files in a specific folder X times on Windows. 
-It can be parameter to 
-
-* blacklist by files name or extension (like .doc, .txt, etc..)
-* specify the number of copy
-* specify the depth level of recursive search in folder
-
-### Use
-
-    python print_doe.py -d "c:\Users\rousseaua\folder"
-
-### requirements
-
-Need to install [pywin32](https://sourceforge.net/projects/pywin32/)
+search traduction key between all application modules from Zend Framework 1
