@@ -1,3 +1,3 @@
 #!/bin/bash
 
-grep --color $1 application/**/languages/fr/*.php
+grep --color "$1" application/**/languages/fr/*.php

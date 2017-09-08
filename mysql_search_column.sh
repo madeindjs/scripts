@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Search given columns between all MySQL tables 
 
 display_usage() { 
@@ -15,11 +14,15 @@ if [ -z $1 ]; then
 fi
 
 
-QUERY="SELECT DISTINCT TABLE_NAME, COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME LIKE '%${1}%'"
+QUERY="SELECT DISTINCT TABLE_NAME, COLUMN_NAME, COLUMN_COMMENT FROM INFORMATION_SCHEMA.COLUMNS WHERE COLUMN_NAME LIKE '%${1}%'"
 
+# If TABLE_NAME parameter is set, we add it to query
 if [ -n $2 ]; then
   QUERY="$QUERY AND TABLE_NAME LIKE '%$2%'"
 fi
 
-
-mysql -e "$QUERY"
+# call the query and grep on this to colors matches
+# - grep on TABLE_NAME
+# - grep on COLUMN_NAME
+# - grep on all begining to display all file (and mysql header) 
+mysql -te "$QUERY ORDER BY TABLE_NAME, COLUMN_NAME" | grep --color -ie "$1\|$2\|$"
