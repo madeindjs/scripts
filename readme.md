@@ -5,7 +5,7 @@ My personnally scripts to automate boring stuffs
 
 ## Install
 
-    $ cd ~/usr/bin
+    $ cd ~/.local/bin
     $ git clone https://github.com/madeindjs/scripts.git
     $ chmod u+x scripts/*
     $ mv scripts/* .
@@ -13,23 +13,11 @@ My personnally scripts to automate boring stuffs
 
 ## Scripts
 
-### check_staged_php_files.sh
-
-Check syntax for all PHP files staged by git
-
-
-### check_staged_php_files.sh
-
-Check syntax for all PHP files staged by git
-
-### gac_search_lang.sh
-
-search traduction key between all application modules from Zend Framework 1
-
-### mysql_desc.sh
-
-Search & describe given table
-
+* **check_staged_php_files.sh**: Check syntax for all PHP files staged by git
+* **check_staged_php_files.sh**: Check syntax for all PHP files staged by git
+* **gac_search_lang.sh**: search traduction key between all application modules from Zend Framework 1
+* **mysql_desc.sh**: Search & describe given table
+~~~
     $ mysql_desc.sh use%
     +----------------+--------------+------+-----+---------+-------+
     | Field          | Type         | Null | Key | Default | Extra |
@@ -40,11 +28,9 @@ Search & describe given table
     | IS_GRANTABLE   | varchar(3)   | NO   |     |         |       |
     +----------------+--------------+------+-----+---------+-------+
     Describe information_schema.USER_PRIVILEGES
-
-### mysql_search_column.sh
-
-Seaarch column between all mysql table
-
+~~~
+* **mysql_search_column.sh**: Search column between all mysql table
+~~~
     $ mysql_search_column.sh user_id
     +--------------------------+-------------+
     | TABLE_NAME               | COLUMN_NAME |
@@ -53,3 +39,4 @@ Seaarch column between all mysql table
     | mailings                 | user_id     |
     | menus                    | user_id     |
     | opening_hours            | user_id     |
+~~~
