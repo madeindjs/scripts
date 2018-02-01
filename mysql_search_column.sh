@@ -26,4 +26,4 @@ fi
 # - grep on TABLE_NAME
 # - grep on COLUMN_NAME
 # - grep on all begining to display all file (and mysql header)
-docker exec -it mysql5.6_1 mysql -uroot -psecret -te "$QUERY ORDER BY TABLE_NAME, COLUMN_NAME" | grep --color -aie "$1\|$2\|$"
+docker exec -it mysql5.6 mysql -uroot -psecret -te "$QUERY ORDER BY TABLE_NAME, COLUMN_NAME" | grep --color -aie "$1\|$2\|$"

@@ -17,5 +17,5 @@ else
   TO="database.params.dbname = ${1}"
   sed -ie "s/${FROM}/${TO}/g" application/default/configs/application.ini
   # set default password for the support account
-  echo "UPDATE user SET password = '02cd4e217924d29efdf84abb31ed211e' WHERE login = 'support@gac-technology.com'" | docker exec -i mysql5.6_1 mysql -uroot -psecret "$1"
+  echo "UPDATE user SET password = '02cd4e217924d29efdf84abb31ed211e' WHERE login = 'support@gac-technology.com'" | docker exec -i mysql5.6 mysql -uroot -psecret "$1"
 fi

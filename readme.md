@@ -1,6 +1,8 @@
 Scripts
 =======
 
+![Is It Worth the Time?](https://imgs.xkcd.com/comics/is_it_worth_the_time.png)
+
 My personnally scripts to automate boring stuffs
 
 ## Install
@@ -13,10 +15,12 @@ My personnally scripts to automate boring stuffs
 
 ## Scripts
 
-* **check_staged_php_files.sh**: Check syntax for all PHP files staged by git
-* **check_staged_php_files.sh**: Check syntax for all PHP files staged by git
-* **gac_search_lang.sh**: search traduction key between all application modules from Zend Framework 1
-* **mysql_desc.sh**: Search & describe given table
+* *check_staged_php_files.sh*: Check syntax for all PHP files staged by git
+* PHP / Zend Framework 1
+    * *zf1_search_lang.sh*: search all translations for the given key / value
+    * *zf1_current_database.sh*: find current database connected to application
+* **MySQL**
+    * **mysql_desc.sh**: Search & describe given table
 ~~~
     $ mysql_desc.sh use%
     +----------------+--------------+------+-----+---------+-------+
@@ -29,7 +33,7 @@ My personnally scripts to automate boring stuffs
     +----------------+--------------+------+-----+---------+-------+
     Describe information_schema.USER_PRIVILEGES
 ~~~
-* **mysql_search_column.sh**: Search column between all mysql table
+    * *mysql_search_column.sh*: Search column between all mysql table
 ~~~
     $ mysql_search_column.sh user_id
     +--------------------------+-------------+
@@ -40,3 +44,6 @@ My personnally scripts to automate boring stuffs
     | menus                    | user_id     |
     | opening_hours            | user_id     |
 ~~~
+  * *mysql_run_files_on_databases.sh*: Run given SQL on migration on all databases corresponding to a specific patern
+* **SSH**
+  * *ssh_dev.sh*: Connect on server on given directory (or directory corresponding to my local branch)

@@ -5,16 +5,20 @@
 # $1 = file
 # $2 = filter
 
-WWW='/usr/local/apache2/htdocs/www/gac-report'
-
+WWW='/usr/local/apache2/htdocs/gac-report'
+PHPUNIT_XML="$WWW/build/phpunit.xml"
+PHPUNIT_BIN="$WWW/vendor/bin/phpunit"
 
 
 if [ -z $1 ]; then
-	docker exec php5.6_1 "$WWW/vendor/bin/phpunit" -c "$WWW/tests/configs/phpunit/phpunit.xml"
+	# no params provided, launch all tests
+	docker exec php5.6 "$PHPUNIT_BIN" --no-coverage -c "$PHPUNIT_XML"
 else
 	if [ -z $2 ]; then
-		docker exec php5.6_1 "$WWW/vendor/bin/phpunit" -c "$WWW/tests/configs/phpunit/phpunit.xml" "$WWW/$1"
+		# file provided, launch this file
+		docker exec php5.6 "$PHPUNIT_BIN" --no-coverage -c "$PHPUNIT_XML" "$WWW/$1"
 	else
-		docker exec php5.6_1 "$WWW/vendor/bin/phpunit" -c "$WWW/tests/configs/phpunit/phpunit.xml" --filter "$2" "$WWW/$1"
+		# file & filter provided, launch filter on file provided
+		docker exec php5.6 "$PHPUNIT_BIN" --no-coverage -c "$PHPUNIT_XML" --filter "$2" "$WWW/$1"
 	fi
 fi

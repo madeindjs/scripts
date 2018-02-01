@@ -1,10 +1,10 @@
 #!/bin/bash
 # Search & describe given table
 
-# Search Database & Table 
+# Search Database & Table
 QUERY_FROM="FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME LIKE '$1' LIMIT 1"
-DATABASE=`docker exec -it mysql5.6_1 mysql -uroot -psecret -sB -e "SELECT DISTINCT TABLE_SCHEMA $QUERY_FROM" 2> /dev/null`
-TABLE=`docker exec -it mysql5.6_1 mysql -uroot -psecret -sB -e "SELECT DISTINCT TABLE_NAME $QUERY_FROM" 2> /dev/null`
+DATABASE=`docker exec -it mysql5.6 mysql -uroot -psecret -sB -e "SELECT DISTINCT TABLE_SCHEMA $QUERY_FROM" 2> /dev/null`
+TABLE=`docker exec -it mysql5.6 mysql -uroot -psecret -sB -e "SELECT DISTINCT TABLE_NAME $QUERY_FROM" 2> /dev/null`
 DB_TABLE="$DATABASE.$TABLE"
 
 if [ -z $TABLE ] ; then
