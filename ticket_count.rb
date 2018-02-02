@@ -7,6 +7,8 @@
 #
 # add branch name of your project
 
+require 'colorize'# gem install colorize
+
 # verify file exists
 unless File.exist? ".tickets_count.log"
 	puts "File '.tickets_count.log' was not found"
@@ -29,9 +31,20 @@ File.open(".tickets_count.log", "r") do |file|
 	end
 end
 
+# get length of the longer ticket name for output
+max_length = 0
+tickets.keys.each do |ticket|
+	max_length = ticket.length if ticket.length > max_length
+end
+max_length += 1
+
 # display them
-tickets.each do |ticket,  value|
-	puts "#{ticket}: spend %.2f" % (value / 60.0)
+tickets.sort_by{ |k, v| v }.reverse.each do |ticket,  value|
+	puts "\t%s %s %.2f" % [
+		ticket.colorize(:light_blue),
+		" "*(max_length - ticket.length),
+		(value / 60.0)
+	]
 end
 
 # delete file?
