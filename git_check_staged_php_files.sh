@@ -1,8 +1,6 @@
 #!/bin/bash
 
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-DEFAULT='\033[0m'
+. _variables.sh
 
 files=`git diff --name-only | grep -E '.php$' `
 for file in $files; do

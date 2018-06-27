@@ -6,10 +6,7 @@
 #    $1 as path of SQL file
 #    $2 as patern of databases to run migration
 
-GREEN='\033[0;32m'
-RED='\033[0;31m'
-DEFAULT='\033[0m'
-
+. _variables.sh
 
 display_usage() {
   echo "Run given SQL on migration on all databases corresponding to a specific patern"
@@ -37,14 +34,14 @@ if [[ ! -f $1 ]]; then
 fi
 
 # list all database
-databases=`docker exec -it mysql5.6 mysql -uroot -psecret -te "SHOW DATABASES"`
+databases=`docker exec -it mysql5.7 mysql -uroot -psecret -te "SHOW DATABASES"`
 
 for database in $databases; do
   # run migration only for database beginning by `gr_`
   if [[ $database == *"${patern}"* ]]; then
 
     # check status
-    if ( cat "$1" | docker exec -i mysql5.6 mysql -uroot -psecret "$database" ); then
+    if ( cat "$1" | docker exec -i mysql5.7 mysql -uroot -psecret "$database" ); then
  	    echo -e "${GREEN}[x] migrated @ ${database}${DEFAULT}\n"
     else
       echo -e "${RED}[ ] failed @ ${database}${DEFAULT}\n"

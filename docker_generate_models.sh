@@ -1,3 +1,4 @@
 #!/bin/bash
+. _variables.sh
 
-docker exec -it php5.6_1 bash -c "cd /usr/local/apache2/htdocs/www/gac-report/scripts && ./generate_models.sh"
+docker exec -it php5.6 bash -c "cd ${WWW}/scripts && ./generate_models.sh"
